@@ -81,7 +81,7 @@ export const getGameScreenshots = async (id) => {
 export const getCoopGames = async () => {
     try {
         // Lista seleccionada manualmente
-        const slugs = ['overcooked-2', 'a-way-out', 'stardew-valley', 'cult-of-the-lamb', 'league-of-legends'];
+        const slugs = ['overcooked-2', 'a-way-out-2018', 'stardew-valley', 'cult-of-the-lamb', 'league-of-legends'];
 
         const gamesData = await Promise.all(
             slugs.map(async (slug) => {
