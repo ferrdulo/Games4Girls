@@ -1,0 +1,242 @@
+.games-page {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.games-header {
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 3.5rem;
+    margin-bottom: 2.5rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    color: white;
+    text-shadow: 0 10px 30px rgba(255, 0, 127, 0.4);
+}
+
+.search-bar-container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    border-radius: 100px;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+        var(--grad-glow) border-box;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.search-bar-container:focus-within {
+    transform: scale(1.02);
+    box-shadow: 0 15px 50px rgba(255, 0, 127, 0.3);
+}
+
+.search-icon {
+    color: var(--accent-primary);
+    margin-right: 1.2rem;
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 0.75rem 0;
+    font-size: 1.2rem;
+    outline: none;
+    font-family: var(--font-main);
+}
+
+.search-input::placeholder {
+    color: var(--text-dim);
+    opacity: 0.6;
+}
+
+.search-button {
+    background: var(--grad-feminine);
+    color: white;
+    padding: 0.8rem 2.5rem;
+    border-radius: 100px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(255, 0, 127, 0.3);
+}
+
+.search-button:hover {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 0, 127, 0.5);
+}
+
+.games-content {
+    margin-top: 2rem;
+}
+
+.content-meta {
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.results-label {
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    background: var(--grad-feminine);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.no-results {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 6rem;
+    color: var(--text-dim);
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+}
+
+@media (max-width: 968px) {
+    .page-title {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .games-page {
+        padding: 2rem 1rem;
+    }
+
+    .page-title {
+        font-size: 2.2rem;
+    }
+
+    .search-button {
+        padding: 0.7rem 1.5rem;
+    }
+}
+
+/* Pagination Styles */
+.pagination-container {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.page-info {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.current-page {
+    color: var(--accent-primary);
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.total-pages {
+    color: white;
+}
+
+.pagination-actions {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pagination-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.pagination-btn.next,
+.pagination-btn.prev {
+    background: var(--grad-feminine);
+    color: white;
+    box-shadow: 0 10px 20px rgba(255, 0, 127, 0.3);
+}
+
+.pagination-btn.end,
+.pagination-btn.first {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.pagination-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+.pagination-btn.next:hover,
+.pagination-btn.prev:hover {
+    box-shadow: 0 15px 30px rgba(255, 0, 127, 0.5);
+}
+
+.pagination-btn.end:hover,
+.pagination-btn.first:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent-primary);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* Mini Loader for Pagination */
+.loading-container.mini {
+    min-height: 300px;
+}
+
+.loader.mini {
+    width: 40px;
+    height: 40px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

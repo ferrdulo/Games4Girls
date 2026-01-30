@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,700;1,900&display=swap');
+
+:root {
+  /* Ultra-vibrant feminine & pride palette */
+  --bg-dark: #0f0514;
+  --bg-extra: #1a0525;
+  --accent-primary: #ff007f;
+  /* Hot Pink */
+  --accent-secondary: #7000ff;
+  /* Electric Purple */
+  --accent-tertiary: #00f2ff;
+  /* Cyan pop */
+  --accent-gold: #ffd700;
+
+  /* Iridescent & Pride Gradients */
+  --grad-pride: linear-gradient(45deg, #ff0000, #ff8c00, #ffee00, #4cff00, #0051ff, #7a00ff);
+  --grad-feminine: linear-gradient(135deg, #ff007f 0%, #ff4da6 50%, #bd93f9 100%);
+  --grad-glow: linear-gradient(to right, #ff007f, #7000ff, #00f2ff);
+
+  --text-main: #fff0f5;
+  --text-dim: #f0a0d0;
+  --glass-border: rgba(255, 0, 127, 0.3);
+  --glass-bg: rgba(15, 5, 20, 0.75);
+
+  --font-main: 'Outfit', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 0, 127, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(112, 0, 255, 0.15) 0%, transparent 40%);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Sparkle background effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  pointer-events: none;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.glass-morphism {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+.text-gradient {
+  background: var(--grad-feminine);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  text-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+}
+
+.section-title::after {
+  content: '✨';
+  font-size: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Scrollbar Style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grad-feminine);
+  border-radius: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 5px var(--accent-primary);
+  }
+
+  50% {
+    box-shadow: 0 0 20px var(--accent-primary);
+  }
+
+  100% {
+    box-shadow: 0 0 5px var(--accent-primary);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
