@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Gamepad2, Search, Home, Heart } from 'lucide-react';
+import { Gamepad2, Search, Home, Heart, Users } from 'lucide-react';
+
 import './Navbar.css';
 
 const Navbar = () => {
@@ -23,6 +24,11 @@ const Navbar = () => {
                         <Search size={20} />
                         <span>Juegos</span>
                     </NavLink>
+                    <NavLink to="/publishers" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+                        <Users size={20} />
+                        <span>Distribuidores</span>
+                    </NavLink>
+
                     <NavLink to="/favorites" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                         <Heart size={20} />
                         <span>Favoritos</span>

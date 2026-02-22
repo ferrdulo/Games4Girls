@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getGameDetails, getGameScreenshots, getRelatedGames } from '../services/api';
 import { Star, Calendar, ArrowLeft, Users, Globe, Building2, Heart } from 'lucide-react';
 import { useFavorites } from '../context/FavoritesContext';
@@ -86,10 +86,39 @@ const GameDetails = () => {
                                     <span>{isFav ? 'En mi Colección' : 'Añadir a Favoritos'}</span>
                                 </button>
                             </div>
-                            <div className="tags-container">
-                                {game.genres?.map(g => (
-                                    <span key={g.id} className="genre-tag">{g.name}</span>
-                                ))}
+                            <div className="taxonomy-container">
+                                {game.genres && game.genres.length > 0 && (
+                                    <div className="taxonomy-section">
+                                        <span className="taxonomy-label">Géneros:</span>
+                                        <div className="tags-container">
+                                            {game.genres.map(g => (
+                                                <Link
+                                                    key={g.id}
+                                                    to={`/games?genre=${g.id}&genreName=${encodeURIComponent(g.name)}`}
+                                                    className="genre-tag clickable-tag"
+                                                >
+                                                    {g.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                {game.tags && game.tags.length > 0 && (
+                                    <div className="taxonomy-section">
+                                        <span className="taxonomy-label">Etiquetas:</span>
+                                        <div className="tags-container">
+                                            {game.tags.slice(0, 15).map(t => (
+                                                <Link
+                                                    key={t.id}
+                                                    to={`/games?tag=${t.id}&tagName=${encodeURIComponent(t.name)}`}
+                                                    className="regular-tag clickable-tag"
+                                                >
+                                                    {t.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -148,8 +177,15 @@ const GameDetails = () => {
 
                             <div className="publisher-info">
                                 <span className="label">Distribuidor</span>
-                                <span className="value">{game.publishers?.map(p => p.name).join(', ') || 'N/A'}</span>
+                                <div className="publisher-links">
+                                    {game.publishers?.map(p => (
+                                        <Link key={p.id} to={`/publisher/${p.id}`} className="value link publisher-link">
+                                            {p.name}
+                                        </Link>
+                                    )) || 'N/A'}
+                                </div>
                             </div>
+
                         </div>
                     </aside>
                 </div>

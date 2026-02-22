@@ -155,13 +155,67 @@
 .genre-tag {
     background: rgba(255, 0, 127, 0.15);
     color: var(--accent-primary);
-    padding: 8px 20px;
+    padding: 6px 16px;
     border-radius: 100px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 800;
     border: 1px solid var(--accent-primary);
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.genre-tag:hover {
+    background: var(--grad-feminine);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+}
+
+.regular-tag {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-dim);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.regular-tag:hover {
+    background: var(--grad-feminine);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+}
+
+.taxonomy-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.taxonomy-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.taxonomy-label {
+    font-size: 0.85rem;
+    color: var(--accent-tertiary);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    opacity: 0.8;
 }
 
 .details-container {
@@ -275,9 +329,32 @@
 
 .publisher-info {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
+    padding-top: 2.5rem;
     text-align: center;
 }
+
+.publisher-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.publisher-link {
+    color: var(--accent-tertiary) !important;
+    text-transform: uppercase;
+    font-weight: 800 !important;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.publisher-link:hover {
+    color: white !important;
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px var(--accent-tertiary);
+}
+
 
 /* Related Games Section - Mini-Pride Style */
 .related-section {

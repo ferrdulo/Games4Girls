@@ -1,0 +1,26 @@
+.publishers-page {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.publishers-header {
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.publishers-content {
+    margin-top: 2rem;
+}
+
+.publishers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .publishers-page {
+        padding: 2rem 1rem;
+    }
+}

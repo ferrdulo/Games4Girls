@@ -52,21 +52,26 @@ export const getGameDetails = async (id) => {
     }
 };
 
-export const getGamesByCategory = async (category, page = 1) => {
+export const getFilteredGames = async (filters, page = 1) => {
     try {
         const response = await rawgApi.get('/games', {
             params: {
-                genres: category,
+                ...filters,
                 page,
                 page_size: 12,
             },
         });
         return response.data;
     } catch (error) {
-        console.error('Error al obtener juegos por categoría:', error);
+        console.error('Error al obtener juegos filtrados:', error);
         throw error;
     }
 };
+
+export const getGamesByCategory = async (category, page = 1) => {
+    return getFilteredGames({ genres: category }, page);
+};
+
 
 export const getGameScreenshots = async (id) => {
     try {
@@ -132,4 +137,36 @@ export const getRelatedGames = async (genreIds, currentId) => {
     }
 };
 
+export const getPublishers = async (search = '', page = 1) => {
+    try {
+        const response = await rawgApi.get('/publishers', {
+            params: {
+                search: search || undefined,
+                page,
+                page_size: 15,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener distribuidores:', error);
+        throw error;
+    }
+};
+
+export const getPublisherDetails = async (id) => {
+
+    try {
+        const response = await rawgApi.get(`/publishers/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener detalles del distribuidor:', error);
+        throw error;
+    }
+};
+
+export const getPublisherGames = async (id, page = 1) => {
+    return getFilteredGames({ publishers: id }, page);
+};
+
 export default rawgApi;
+
