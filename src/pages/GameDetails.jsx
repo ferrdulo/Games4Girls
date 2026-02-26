@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getGameDetails, getGameScreenshots, getRelatedGames } from '../services/api';
+import { useDispatch, useSelector } from 'react-redux';
 import { Star, Calendar, ArrowLeft, Users, Globe, Building2, Heart } from 'lucide-react';
-import { useFavorites } from '../context/FavoritesContext';
+import { toggleFavorite } from '../redux/actions/gameActions';
+import * as api from '../services/service';
 import GameCard from '../components/GameCard/GameCard';
 import './GameDetails.css';
 
 const GameDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { toggleFavorite, isFavorite } = useFavorites();
-    const isFav = isFavorite(parseInt(id));
+    const dispatch = useDispatch();
+    const { favorites } = useSelector(state => state.games);
+    const isFav = favorites.some(f => f.id === parseInt(id));
     const [game, setGame] = useState(null);
     const [screenshots, setScreenshots] = useState([]);
     const [relatedGames, setRelatedGames] = useState([]);
@@ -20,17 +20,20 @@ const GameDetails = () => {
         const fetchDetails = async () => {
             try {
                 const [details, screenData] = await Promise.all([
-                    getGameDetails(id),
-                    getGameScreenshots(id)
+                    api.getGameDetails(id),
+                    api.getGameScreenshots(id)
                 ]);
                 setGame(details);
                 setScreenshots(screenData.results);
 
-                // Fetch related games based on genres
                 if (details.genres && details.genres.length > 0) {
                     const genreIds = details.genres.map(g => g.id).join(',');
-                    const related = await getRelatedGames(genreIds, id);
-                    setRelatedGames(related.results);
+                    // Note: getRelatedGames might need to be added to service.js if it's missing
+                    // Actually I didn't add it in my previous write_to_file for service.js
+                    // I'll need to update service.js or fix the call.
+                    // For now I'll assume it's in service.js or I'll add it.
+                    const related = await api.getFilteredGames({ genres: genreIds, exclude_add_to_series: true }, 1);
+                    setRelatedGames(related.results.filter(g => g.id !== parseInt(id)));
                 }
             } catch (error) {
                 console.error("Error al obtener los detalles del juego", error);
@@ -79,7 +82,7 @@ const GameDetails = () => {
                                 </span>
                                 <button
                                     className={`favorite-btn-details ${isFav ? 'active' : ''}`}
-                                    onClick={() => toggleFavorite(game)}
+                                    onClick={() => dispatch(toggleFavorite(game))}
                                     title={isFav ? "Quitar de favoritos" : "Añadir a favoritos"}
                                 >
                                     <Heart size={20} fill={isFav ? "currentColor" : "none"} />

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useFavorites } from '../context/FavoritesContext';
+import { useSelector } from 'react-redux';
 import GameCard from '../components/GameCard/GameCard';
 import { Heart, Sparkles } from 'lucide-react';
 import './Favorites.css';
 
 const Favorites = () => {
-    const { favorites } = useFavorites();
+    const { favorites } = useSelector(state => state.games);
 
     return (
         <div className="favorites-page">

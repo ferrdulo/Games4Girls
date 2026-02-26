@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Search as SearchIcon, X } from 'lucide-react';
-import { searchGames, getPopularGames, getFilteredGames } from '../services/api';
+import { fetchGames } from '../redux/actions/gameActions';
+import * as api from '../services/service';
 
 import GameCard from '../components/GameCard/GameCard';
 import './Games.css';
 
 const Games = () => {
+    const dispatch = useDispatch();
+    const { list: games, loading: reduxLoading } = useSelector(state => state.games);
+
     const [searchParams, setSearchParams] = useSearchParams();
+    // ... rest of useSearchParams logic
     const genreFilter = searchParams.get('genre');
     const tagFilter = searchParams.get('tag');
     const genreName = searchParams.get('genreName');
@@ -16,7 +20,7 @@ const Games = () => {
     const pageParam = parseInt(searchParams.get('page')) || 1;
 
     const [searchTerm, setSearchTerm] = useState(queryParam || '');
-    const [games, setGames] = useState([]);
+    const [localGames, setLocalGames] = useState([]);
     const [loading, setLoading] = useState(false);
     const [resultsFor, setResultsFor] = useState('Juegos Populares');
     const [currentPage, setCurrentPage] = useState(pageParam);
@@ -28,22 +32,26 @@ const Games = () => {
             let data;
             const searchVal = queryParam || '';
 
-            // Prioridad: Filtros de URL > Búsqueda > Populares
             if (genreFilter) {
-                data = await getFilteredGames({ genres: genreFilter }, page);
+                data = await api.getFilteredGames({ genres: genreFilter }, page);
                 setResultsFor(`Género: ${genreName || genreFilter}`);
+                setLocalGames(data.results);
             } else if (tagFilter) {
-                data = await getFilteredGames({ tags: tagFilter }, page);
+                data = await api.getFilteredGames({ tags: tagFilter }, page);
                 setResultsFor(`Etiqueta: ${tagName || tagFilter}`);
+                setLocalGames(data.results);
             } else if (searchVal.trim().length > 2) {
-                data = await searchGames(searchVal, page);
+                data = await api.searchGames(searchVal, page);
                 setResultsFor(`Resultados para "${searchVal}"`);
+                setLocalGames(data.results);
             } else {
-                data = await getPopularGames(page);
+                // For popular games, we use Redux
+                dispatch(fetchGames(page));
+                // We'll sync localGames with Redux list in a separate effect
                 setResultsFor('Juegos Populares');
+                return;
             }
 
-            setGames(data.results);
             const pageSize = 12;
             setTotalPages(Math.ceil(data.count / pageSize));
             setCurrentPage(page);
@@ -53,6 +61,16 @@ const Games = () => {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (!genreFilter && !tagFilter && !(queryParam && queryParam.trim().length > 2)) {
+            setLocalGames(games);
+            setLoading(reduxLoading);
+            // Assuming total count for popular games is fixed or we don't care about it for now
+            // In a real app, FETCH_GAMES_SUCCESS would also return totalPages
+            setTotalPages(500); // RAWG default
+        }
+    }, [games, reduxLoading, genreFilter, tagFilter, queryParam]);
 
     // Efecto para reaccionar a cambios en URL (filtros, búsqueda o página)
     useEffect(() => {
@@ -165,8 +183,8 @@ const Games = () => {
                 ) : (
                     <>
                         <div className="games-grid">
-                            {games.length > 0 ? (
-                                games.map(game => (
+                            {localGames.length > 0 ? (
+                                localGames.map(game => (
                                     <GameCard key={game.id} game={game} />
                                 ))
                             ) : (

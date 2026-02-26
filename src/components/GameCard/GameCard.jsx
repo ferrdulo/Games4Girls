@@ -1,17 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Star, Monitor, Smartphone, Cpu, Heart } from 'lucide-react';
-import { useFavorites } from '../../context/FavoritesContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleFavorite } from '../../redux/actions/gameActions';
 import './GameCard.css';
 
 const GameCard = ({ game }) => {
-    const { toggleFavorite, isFavorite } = useFavorites();
-    const isFav = isFavorite(game.id);
+    const dispatch = useDispatch();
+    const { favorites } = useSelector(state => state.games);
+    const isFav = favorites.some(f => f.id === game.id);
 
     const handleFavorite = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        toggleFavorite(game);
+        dispatch(toggleFavorite(game));
     };
 
     const getPlatformIcon = (slug) => {
