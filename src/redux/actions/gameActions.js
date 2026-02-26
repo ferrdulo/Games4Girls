@@ -12,8 +12,17 @@ export const fetchGames = (page = 1) => async (dispatch) => {
 };
 
 export const toggleFavorite = (game) => (dispatch, getState) => {
-    dispatch({ type: types.TOGGLE_FAVORITE, payload: game });
-    // Save to localStorage
+    const minimalGame = {
+        id: game.id,
+        name: game.name,
+        background_image: game.background_image,
+        rating: game.rating,
+        parent_platforms: game.parent_platforms,
+        released: game.released,
+        genres: game.genres
+    };
+
+    dispatch({ type: types.TOGGLE_FAVORITE, payload: minimalGame });
     const { games } = getState();
     localStorage.setItem('g4g_favorites', JSON.stringify(games.favorites));
 };

@@ -12,7 +12,14 @@ export const fetchEvents = () => async (dispatch) => {
 };
 
 export const joinEvent = (event) => (dispatch, getState) => {
-    dispatch({ type: types.JOIN_EVENT, payload: event });
+    const minimalEvent = {
+        id: event.id,
+        title: event.title,
+        location: event.location,
+        image: event.image
+    };
+
+    dispatch({ type: types.JOIN_EVENT, payload: minimalEvent });
     const { events } = getState();
     localStorage.setItem('g4g_joined_events', JSON.stringify(events.joinedEvents));
 };
