@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Heart, Star, Monitor, Smartphone, Cpu } from 'lucide-react';
 import { toggleFavorite } from '../../redux/actions/gameActions';
 import './GameCard.css';
 

@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Star, Calendar, ArrowLeft, Users, Globe, Building2, Heart } from 'lucide-react';
 import { toggleFavorite } from '../redux/actions/gameActions';

@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Search as SearchIcon, X } from 'lucide-react';
 import { fetchGames } from '../redux/actions/gameActions';
