@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getPopularGames, getCoopGames } from '../services/api';
+import { getPopularGames, getCoopGames } from '../services/service';
 import GameCard from '../components/GameCard/GameCard';
 import Carousel from '../components/Carousel/Carousel';
 import './Home.css';

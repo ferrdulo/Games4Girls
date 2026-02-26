@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search as SearchIcon, Filter } from 'lucide-react';
-import { searchGames, getPopularGames, getGamesByCategory } from '../services/api';
+import { searchGames, getPopularGames, getGamesByCategory } from '../services/service';
 import GameCard from '../components/GameCard/GameCard';
 import './Explore.css';
 

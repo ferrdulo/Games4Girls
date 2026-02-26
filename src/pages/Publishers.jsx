@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search as SearchIcon, X } from 'lucide-react';
-import { getPublishers } from '../services/api';
+import { getPublishers } from '../services/service';
 import PublisherCard from '../components/PublisherCard/PublisherCard';
 import './Publishers.css';
 

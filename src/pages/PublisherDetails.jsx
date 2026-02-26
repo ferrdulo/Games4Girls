@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { getPublisherDetails, getPublisherGames } from '../services/api';
+import { getPublisherDetails, getPublisherGames } from '../services/service';
 import { ArrowLeft, Globe, Gamepad2, Users } from 'lucide-react';
 import GameCard from '../components/GameCard/GameCard';
 import './PublisherDetails.css';
