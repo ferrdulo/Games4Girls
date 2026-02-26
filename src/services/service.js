@@ -84,3 +84,11 @@ export const getPublisherDetails = async (id) => {
     const response = await rawgApi.get(`/publishers/${id}`);
     return response.data;
 };
+
+export const getGamesByCategory = async (category, page = 1) => {
+    return getFilteredGames({ genres: category }, page);
+};
+
+export const getPublisherGames = async (id, page = 1) => {
+    return getFilteredGames({ publishers: id }, page);
+};
